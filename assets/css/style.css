@@ -47,14 +47,15 @@ a {
   display: flex;
   padding: 3pc;
 }
-.text-gradient {
+*/
+/* .text-gradient {
   background: linear-gradient(to right, red, re);
   --webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-flex;
   margin-left: -21pc;
-}
+} */
 .nav-brand {
   font-size: 1.5em;
   font-weight: bold;
@@ -79,7 +80,8 @@ a {
 table {
   display: inline;
   border-spacing: 0px;
-  width: 100%;
+  max-width: 100%;
+  margin: 18pc;
 }
 .table td,
 .table th {
@@ -133,14 +135,15 @@ table {
 /* add user & update user template */
 .form-title {
   margin-top: 2em;
+  margin-left: 33px;
 }
 .form-title > h2 {
   padding: 0.5em 0;
 }
 .new_user {
   max-width: 786px;
-  margin: auto;
-  /* display: inline-flex; */
+  margin: -33px;
+  display: inline;
 }
 #update_user .form-group,
 #add_user .form-group {

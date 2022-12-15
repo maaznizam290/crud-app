@@ -2,15 +2,19 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const path = require('path');
+
+const connectDB = require('./server/database/connection');
 // const ejs = require('ejs')
 const app = express();
 const bodyParser = require('body-parser');
-dotenv.config({path:'config.env'})
-const PORT = process.env.port ||3000;
+dotenv.config({path:'../crudapp/config.env'})
+const PORT = 3000 ;
 
 // log requests
 app.use(morgan('tiny'));
 
+// mongoDB connection
+connectDB();
 // parse request to body parser
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -23,11 +27,10 @@ app.use('/css',express.static(path.resolve(__dirname,"assets/css")))
 app.use('/img',express.static(path.resolve(__dirname,"assets/img")))
 app.use('/js',express.static(path.resolve(__dirname,"assets/js")))
 
-// css/style.css
-app.get('/',(req,res)=>{
-    res.render('index')
-})
 
+// load routers
+app.use('/',require('./server/routes/router'))
 app.listen(PORT,()=>{
-    console.log(`Server is running at http://localhost:${PORT}`)
+    console.log(`Server is running at http://localhost:${PORT}`);
+    // console.log(`Server is running in ${process.env.NODE_ENV} on ${PORT}`)
 });
