@@ -1,10 +1,6 @@
 const axios = require('axios');
 const { query } = require('express');
 
-
-
-
-
 exports.homeRoutes = (req,res)=>{
     // Make a get request to /api/users
     axios.get("http://localhost:3000/api/users")
@@ -13,7 +9,7 @@ exports.homeRoutes = (req,res)=>{
         res.render('index',{users:response.data})
     }).catch(err=>{
         res.send(err);
-    })
+    }) 
     }
 
 exports.add_user = (req,res)=>{
