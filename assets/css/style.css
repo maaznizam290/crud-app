@@ -74,7 +74,11 @@ a {
   padding: 0.5em 1em;
 }
 #site-main .container form {
-  margin: 2em 0;
+  /* margin: 2em 0; */
+  margin: 2em -138px;
+  width: 112%;
+  display: inline-table;
+  position: relative;
 }
 
 table {
@@ -129,9 +133,9 @@ table {
     position: relative;
   }
 }
-.aisehe {
+/* .aisehe {
   margin-left: -55pc;
-}
+} */
 /* add user & update user template */
 .form-title {
   margin-top: 2em;

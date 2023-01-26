@@ -1,3 +1,4 @@
+const { isObjectIdOrHexString } = require('mongoose');
 var Userdb = require('../model/model')
 // create and save new user
 exports.create = (req,res)=>{
@@ -14,13 +15,17 @@ const user = new Userdb({
     status:req.body.status
 })
 
+
+
 // save user in the database
 
 user
   .save(user)
   .then(data=>{
-    // res.send(data)
-    res.redirect('/add-user')
+    res.send(data)
+    res.redirect('/add-user');
+    // res.redirect('/update-user');
+    
   })
   .catch(err=>{
     res.status(500).send({
@@ -28,8 +33,6 @@ user
     })
   })
   }
-
-
 // retrieve and return all the users/ retrieve and return a single user
 exports.find = (req,res)=>{
     if(req.query.id){
@@ -64,24 +67,29 @@ exports.update = (req,res)=>{
     .send({message:"Data to update can not be empty "})
    }
    const id = req.params.id;
-   Userdb.findByIdAndUpdate(id,req.body,{useFindAndModify:false})
+   Userdb.findOneAndUpdate(id,req.body,{id:req.params.id})
    .then(data=>{
-    if(!data){
+    if(data){
         res.status(404).send({message:`Can not update the user ${id},User not found`})
     }else{
         res.send(data)
+        res.status(200).send({message:`The user can be updated now ${id,res} `})
     }
    }).catch(err=>{
     res.status(500).send({message:"This users can not be updated"})
    })
 }
+
+
+
+
 // Delete a user with speicified user id in the request
 
 exports.delete = (req,res)=>{
 const id = req.params.id;
 Userdb.findByIdAndDelete(id)
 .then(data=>{
-    if(!data){
+    if(data){
         res.status(404).send({message:`Cannot delete with user id ${id}.Maybe id is wrong`})
     }else{
         res.send({message:"User was deleted successfully"});
@@ -91,5 +99,3 @@ Userdb.findByIdAndDelete(id)
     res.status(500).send({message:"Could not delete the user with user id=" +id})
 })
 }
-
-

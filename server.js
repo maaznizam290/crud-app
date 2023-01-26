@@ -7,6 +7,8 @@ const ejs = require('ejs')
 const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
+const { Router } = require('express');
+
 dotenv.config({path:'../crudapp/config.env'})
 const PORT = 3000 ;
 app.use(cors())
@@ -27,9 +29,8 @@ app.use('/css',express.static(path.resolve(__dirname,"assets/css")))
 app.use('/img',express.static(path.resolve(__dirname,"assets/img")))
 app.use('/js',express.static(path.join(__dirname,"assets/js")))
 
-
 // load routers
-app.use('/',require('./server/routes/router'))
+app.use('/',require('./server/routes/router.js'))
 app.listen(PORT,()=>{
     console.log(`Server is running at http://localhost:${PORT}`);
     // console.log(`Server is running in ${process.env.NODE_ENV} on ${PORT}`)
